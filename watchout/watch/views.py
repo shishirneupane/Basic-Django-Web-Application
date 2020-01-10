@@ -3,4 +3,4 @@ from django.http import HttpResponse
 # Create your views here.
 
 def watchhmo(request):
-	return render(request, 'home.html', {'name': 'Luck'})
+	return render(request, 'home.html', {'name': 'Ashish Giri'})

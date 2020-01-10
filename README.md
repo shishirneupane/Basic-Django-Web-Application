@@ -1,5 +1,5 @@
 # watchout
-Django web application for online movie streaming
+Django web application for online movie database
 
 YNWA Group Members:
   - Shishir Neupane

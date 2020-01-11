@@ -1,0 +1,46 @@
+{% extends 'watch/base.html' %}
+
+{% block content %}
+
+<form>
+    <div style="padding-bottom: 30px; color: blue;">
+        <h1>Register Form</h1>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4" style="padding-right: 40px;">
+          <label>First Name</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-md-4" style="padding-right: 40px;">
+          <label>Last Name</label>
+          <input type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4" style="padding-right: 40px;">
+            <label>Email Address</label>
+            <input type="email" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4" style="padding-right: 40px;">
+          <label>Password</label>
+          <input type="password" class="form-control">
+        </div>
+        <div class="form-group col-md-4" style="padding-right: 40px;">
+          <label>Confirm Password</label>
+          <input type="password" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

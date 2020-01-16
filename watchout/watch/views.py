@@ -4,8 +4,11 @@ from django.contrib.auth.models import User, auth
 
 # Create your views here.
 
+from .forms import UploadForm
+from .models import Movies
+
 def homepage(request):
-	return render(request, "watch/base.html", context={})
+	return render(request, "base.html", context={})
 
 def register(request):
 	if request.method == 'POST':
@@ -37,5 +40,16 @@ def login(request):
 	return render(request, "watch/login.html", context={})
 
 
-def upload(request): 
-	return render(request, 'watch/videos.html', context={})
+def upload_movies(request):
+	form = UploadForm()
+	if request.method == 'POST':
+		form = UploadForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			return redirect('watch:upload')
+	return render(request, 'watch/upload.html', context={"forms":form})
+
+
+def movies_list(request):
+	movie = Movies.objects.all()
+	return render(request, 'watch/movies_list.html', context={"movies":movie})

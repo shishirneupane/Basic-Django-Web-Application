@@ -4,12 +4,12 @@ from django.contrib.auth.models import User, auth
 
 # Create your views here.
 
-def watchhmo(request):
-	return render(request, "watch/home.html", {'name': 'Ashish Giri'})
+def homepage(request):
+	return render(request, "watch/base.html", context={})
 
 def register(request):
 	if request.method == 'POST':
-		first_name = request.POST['first_name'] ##first_name is same as the name of field in html file
+		first_name = request.POST['first_name'] #first_name is same as the name of field in html file
 		last_name = request.POST['last_name']
 		username = request.POST['username']
 		password1 = request.POST['password1']
@@ -23,11 +23,10 @@ def register(request):
 				print("email taken")
 			else:
 				user = User.objects.create_user(username=username, password=password1, email=email, first_name=first_name, last_name=last_name)
-				user.save();
+				user.save()
 				print('user created')
 				return redirect('watch:login')
 	else:
-	# 	return render(request, "watch/registerform.html", context={})
 		return render(request, "watch/register.html", context={})
 
 def registerform(request):

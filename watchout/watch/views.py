@@ -7,9 +7,6 @@ from django.contrib.auth.models import User, auth
 from .forms import UploadForm
 from .models import Movies
 
-def homepage(request):
-	return render(request, "base.html", context={})
-
 def register(request):
 	if request.method == 'POST':
 		first_name = request.POST['first_name'] #first_name is same as the name of field in html file
@@ -46,10 +43,16 @@ def upload_movies(request):
 		form = UploadForm(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
-			return redirect('watch:upload')
+			return redirect('watch:movies')
 	return render(request, 'watch/upload.html', context={"forms":form})
 
 
 def movies_list(request):
 	movie = Movies.objects.all()
 	return render(request, 'watch/movies_list.html', context={"movies":movie})
+
+
+def delete_movies(request, pk):
+	movie = Movies.objects.get(pk=pk)
+	movie.delete()
+	return redirect('watch:movies')

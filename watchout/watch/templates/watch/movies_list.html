@@ -7,21 +7,22 @@
     <thead>
         <tr>
             <th>Movie Name</th>
+            <th>Movie Description</th>
             <th>Download</th>
             <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        {% for movie in movies %}     <!-- pachadi ko books is same as of views.py ko book_list function ko return render ko {"books": book} ko key "books" -->
+        {% for movie in movies %}
         <tr>
-            <td>{{movie.name}}</td>
+            <td>{{movie.movie_title}}</td>
+            <td>{{movie.movie_description}}</td>
             <td> <a href="{{movie.pdf.url}}"> Download Movie </a> </td>
             <td>
-                <form method="POST" action="{% url 'watch:delete_movie' movie.pk %}">
+                <form method="POST" action="{% url 'watch:delete' movie.pk %}">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-primary btn-sm"> Delete </button>
                 </form>
-
             </td>
         </tr>
         {% endfor %}

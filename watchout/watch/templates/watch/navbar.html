@@ -19,8 +19,8 @@
         </li>
         </ul>
     </div>
-    <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="search-bar" method="get" action="{% url 'watch:show_list'%}">
+        <input type="text" name="q" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="color:lime">Search</button>
     </form>
 </nav>

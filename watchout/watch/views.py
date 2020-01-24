@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse 
 from django.contrib.auth.models import User, auth
+from django.db.models import Q
+import json 
 
 # Create your views here.
 
@@ -56,3 +58,27 @@ def delete_movies(request, pk):
 	movie = Movies.objects.get(pk=pk)
 	movie.delete()
 	return redirect('watch:movies')
+
+def get_data_querys(query=None):
+	queryset = []
+
+	queries = query.split(" ")
+	for q in queries:
+		Movies = movie.objects.filter(
+            Q(movie_title__icontains = q)
+            ).distinct()
+
+		for movie in movies:
+		    queryset.append(movie)
+		return list(set(queryset))
+
+def show_all_data(request):
+	movie = movies.objects.all()
+	print(type(movie))
+	dic_type = {"movies": list(movie.values("movie_title"))}
+
+	return JsonResponse(dic_type)
+
+
+
+

@@ -18,7 +18,7 @@
         <tr>
             <td>{{movie.movie_title}}</td>
             <td>{{movie.movie_description}}</td>
-            <td> <a href="{{movie.pdf.url}}"> Download Movie </a> </td>
+            <td> <a href="{{movie.movie_file.url}}"> Download Movie </a> </td>
             <td>
                 <form method="POST" action="{% url 'watch:delete' movie.pk %}">
                     {% csrf_token %}

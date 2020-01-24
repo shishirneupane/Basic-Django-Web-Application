@@ -64,13 +64,20 @@ def get_data_querys(query=None):
 
 	queries = query.split(" ")
 	for q in queries:
-		Movies = movie.objects.filter(
+		movies = Movies.objects.filter(
             Q(movie_title__icontains = q)
             ).distinct()
 
 		for movie in movies:
 		    queryset.append(movie)
 		return list(set(queryset))
+
+def show_list(request):
+	show = ''
+	if request.GET:
+		query = request.GET['q']
+		show = get_data_querys(str(query))
+	return render(request, "watch/movies_list.html", {"movies": show})
 
 def show_all_data(request):
 	movie = movies.objects.all()
@@ -79,6 +86,13 @@ def show_all_data(request):
 
 	return JsonResponse(dic_type)
 
+def watch(request):
+	show = show.objects.all()
+	if request.GET:
+		query = request.GET['q']
+		show = get_data_querys(str(query))
+
+	return render(request, "pages/home.html",{"movies": movie})
 
 
 

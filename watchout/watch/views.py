@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse 
 from django.contrib.auth.models import User, auth
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.db.models import Q
 import json 
 
@@ -32,26 +33,33 @@ def register(request):
 	else:
 		return render(request, "watch/register.html", context={})
 
-def registerform(request):
-	pass
-	
 
-def login(request):
 
+def login_page(request):
 	if request.method == 'POST':
-		username = request.POST.get('username')
-		password =request.POST.get('password')
+		username = request.POST['username']
+		password = request.POST['password']
 
-		user = authenticate(request, username=username, password=password)
+		user = auth.authenticate(username=username, password=password)
 
 		if user is not None:
-			login(request, user)
-			return redirect('upload_movies')
+		
+			auth.login(request, user)
+			print('login')
+			return redirect('watch:movies')
 		else:
-			messages.info(request, 'Username OR password is incorrect')
+			print('logout')
+			messages.info(request, 'invalid credentials')
+			return render(request,'watch/login.html')
 
-	context = {}
-	return render(request, 'watch/login.html', context)
+
+	else:
+		print('get request')
+		return render(request,'watch/login.html')
+
+def logout_page(request):
+	auth.logout(request)
+	return redirect('watch:login')
 	
 
 

@@ -9,11 +9,19 @@
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
+            {% if user.is_authenticated %}
+            <li>Hello, {{user.first_name}}</li>
+            <li class="nav-item"></li>
+           
+                <a class="nav-link" href="{% url 'watch:logout' %}">Logout</a>
+                {% else %}
+                <li class="nav-item">
             <a class="nav-link" href="/register">Register</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/login">Login</a>
         </li>
+        {% endif %}
         <li class="nav-item">
             <a class="nav-link" href="/movies/upload">Upload Movie</a>
         </li>

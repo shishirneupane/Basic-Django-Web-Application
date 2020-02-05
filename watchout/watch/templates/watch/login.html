@@ -2,7 +2,8 @@
 
 {% block content %}
 
-<form>
+<form method="post">
+    {% csrf_token %}
     <div style="padding-bottom: 30px; color: blue;">
         <h1>Login Form</h1>
     </div>
@@ -17,7 +18,7 @@
     <div class="form-row">
         <div class="form-group col-md-4">
           <label>Password</label>
-          <input type="password" class="form-control">
+          <input type="password" class="form-control" name="password">
         </div>
     </div>
 
@@ -27,5 +28,10 @@
         </div>
     </div>
 </form>
+<div>
+    {% for message in messages %}
+    <h3>{{message}}</h3>
+    {% endfor %}
+</div>
 
 {% endblock %}

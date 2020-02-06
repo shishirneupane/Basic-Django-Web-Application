@@ -49,7 +49,7 @@ def login_page(request):
 			return redirect('watch:movies')
 		else:
 			print('logout')
-			messages.info(request, 'invalid credentials')
+			messages.info(request, 'Username or password is invalid')
 			return render(request,'watch/login.html')
 
 

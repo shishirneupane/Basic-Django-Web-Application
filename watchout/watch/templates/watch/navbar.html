@@ -14,6 +14,9 @@
             <li class="nav-item"></li>
            
                 <a class="nav-link" href="{% url 'watch:logout' %}">Logout</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/movies/upload">Upload Movie</a>
+                </li>
                 {% else %}
                 <li class="nav-item">
             <a class="nav-link" href="/register">Register</a>
@@ -22,9 +25,7 @@
             <a class="nav-link" href="/login">Login</a>
         </li>
         {% endif %}
-        <li class="nav-item">
-            <a class="nav-link" href="/movies/upload">Upload Movie</a>
-        </li>
+        
         </ul>
     </div>
     <form class="search-bar" method="get" action="{% url 'watch:show_list'%}">

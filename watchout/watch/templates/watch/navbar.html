@@ -9,14 +9,23 @@
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/register">Register</a>
+            {% if user.is_authenticated %}
+            <li>Hello, {{user.first_name}}</li>
+            <li class="nav-item"></li>
+           
+                <a class="nav-link" href="{% url 'watch:logout' %}">Logout</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/movies/upload">Upload Movie</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+            <!--<a class="nav-link" href="/register">Register</a> -->
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/login">My Account</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/movies/upload">Upload Movie</a>
-        </li>
+        {% endif %}
+        
         </ul>
     </div>
     <form class="search-bar" method="get" action="{% url 'watch:show_list'%}">

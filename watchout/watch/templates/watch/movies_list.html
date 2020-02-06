@@ -9,7 +9,7 @@
         <tr>
             <th>Movie Name</th>
             <th>Movie Description</th>
-            <th>Download</th>
+            <th>Watch</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -18,7 +18,7 @@
         <tr>
             <td>{{movie.movie_title}}</td>
             <td>{{movie.movie_description}}</td>
-            <td> <a href="{{movie.movie_file.url}}"> Download Movie </a> </td>
+            <td> <a href="{{movie.movie_file.url}}"> Watch Movie </a> </td>
             <td>
                 <form method="POST" action="{% url 'watch:delete' movie.pk %}">
                     {% csrf_token %}

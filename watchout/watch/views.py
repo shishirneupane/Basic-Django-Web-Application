@@ -46,7 +46,7 @@ def login_page(request):
 		
 			auth.login(request, user)
 			print('login')
-			return redirect('watch:movies')
+			return redirect('watch:upload')
 		else:
 			print('logout')
 			messages.info(request, 'Username or password is invalid')

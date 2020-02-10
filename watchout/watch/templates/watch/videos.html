@@ -10,14 +10,15 @@
 <body>
 
 <h1>Video Uploader</h1>
-<form enctype="multipart/form-data" method="POST" action="">
-{% csrf_token %}
+<form enctype="multipart/form-data" method="POST" action=""> <!--method = post because we want the data posted in to this form-->
+	<!--action = "" because we want the data to remain on this form-->
+{% csrf_token %} <!--To prevent cross site request forgery-->
 {{ form.as_p }}
-<input type="submit" value="Upload"/>
-</form>
+<input type="submit" value="Upload"/> <!--submit button to upload -->
+</form> <!-- form tag is used as it involves file uploads -->
 
-<br><br>
-<video width='1000' controls>
+<br><br> 
+<video width='1000' controls> <!--video player using html-->
 <source src='{{ MEDIA_URL }}{{ videofile }}' type='video/mp4'>
 
 </video>

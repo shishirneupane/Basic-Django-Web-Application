@@ -63,7 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages', #it allows to reference the MEDIA_URL variable in the template directories
             ],
         },
     },
@@ -125,5 +125,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #Specifying path to the media created that was created 
 MEDIA_URL = "/movies/upload/"

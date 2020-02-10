@@ -37,7 +37,7 @@ def register(request):
 
 
 
-def login_page(request):
+def login_page(request):  #Login function that carries out login task
 	if request.method == 'POST':
 		username = request.POST['username']
 		password = request.POST['password']

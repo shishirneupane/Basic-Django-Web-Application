@@ -1,34 +1,32 @@
 {% extends "base.html" %}
-
 {% block content %}
-
-
-<table>
-
-    <thead>
-        <tr>
-            <th>Movie Name</th>
-            <th>Movie Description</th>
-            <th>Watch</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for movie in movies %}
-        <tr>
-            <td>{{movie.movie_title}}</td>
-            <td>{{movie.movie_description}}</td>
-            <td> <a href="{{movie.movie_file.url}}"> Watch Movie </a> </td>
-            <td>
+<div class="row">
+    {% for movie in movies %}
+    <div class="row">
+        <div class="card" style="width: 18rem;">
+            {% load static %}
+          <img src="{%static 'play.jpg'%}" class="card-img-top" alt="image">
+          <div class="card-body">
+            <h4 class="card-title">{{movie.movie_title}}</h4>
+            <p class="card-text">{{movie.movie_description}}</p>
+            <p class="card-text">{{movie.release_date}}</p>
+            <a href="{{movie.movie_file.url}}"> Watch Movie </a>
+            {% if request.user.is_authenticated %}
                 <form method="POST" action="{% url 'watch:delete' movie.pk %}">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-primary btn-sm"> Delete </button>
                 </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+                <form action="{% url 'watch:update' movie.pk %}">
+                    <button class="btn btn-primary" type="submit">Update</button>
+                </form>
+            {% else %}
+                <a href="{{movie.movie_file.url}}" class="btn btn-secondary" download> Download </a>
+            {% endif %}
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
-</table>
 
 {% endblock %}

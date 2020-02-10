@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="padding: 10px;">
     <a class="navbar-brand" href="/" style="color:lime">Watchout</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -10,10 +10,9 @@
         </li>
         <li class="nav-item">
             {% if user.is_authenticated %}
-            <li>Hello, {{user.first_name}}</li>
+            <li style="color: lime;">Hello, {{user.first_name}}</li>
             <li class="nav-item"></li>
-           
-                <a class="nav-link" href="{% url 'watch:logout' %}">Logout</a>
+            <a class="nav-link" href="{% url 'watch:logout' %}">Logout</a>
                 <li class="nav-item">
                     <a class="nav-link" href="/movies/upload">Upload Movie</a>
                 </li>
@@ -25,7 +24,6 @@
             <a class="nav-link" href="/login">My Account</a>
         </li>
         {% endif %}
-        
         </ul>
     </div>
     <form class="search-bar" method="get" action="{% url 'watch:show_list'%}">

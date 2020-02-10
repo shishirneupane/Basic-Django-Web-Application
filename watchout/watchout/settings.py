@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'watch',
+    'restapi',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -120,5 +121,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static')
+]
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = "/movies/"
+MEDIA_URL = "/movies/upload/"

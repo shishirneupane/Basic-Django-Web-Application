@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   <title> Edit Moviename </title>
+{% endblock title %}
+
+{% block content %} 
+	<div class="container">
+	<br>
+		<form method="POST" class="row">
+			{% csrf_token %}
+			<strong class="col-lg-4"> Edit Title </strong>
+			<input type="text" class="form-control col-12" name="title" value="{{m.movie_title}}">
+			<strong class="col-lg-4"> Edit Description </strong>
+			<input type="text" class="form-control col-12" name="description" value="{{m.movie_description}}">
+			<strong class="col-lg-4"> Edit Release Date </strong>
+			<input type="text" class="form-control col-12" name="releasedate" value="{{m.release_date}}">
+			<button type="submit" class="btn btn-primary col-lg-2">Update</button>
+		</form>
+	</div>
+{% endblock content %}

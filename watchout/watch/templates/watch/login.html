@@ -1,7 +1,18 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block nav %}
+{% endblock %}
 
+{% block content %}
+<style type="text/css">
+    body{
+    background-image: url(https://ak5.picdn.net/shutterstock/videos/16730485/thumb/1.jpg);
+    background-size: cover;
+    }
+</style>
+
+
+<div class="card card-body" style="text-align: center; width: 45rem;">
 <form method="post">
     {% csrf_token %}
     <div style="padding-bottom: 30px; color: blue;">
@@ -27,12 +38,11 @@
             <button type="submit" class="btn btn-primary">Log In</button>
         </div>
     </div>
-    <h3> Don't Have Account??<a href="/register">&nbsp;Sign Up</a></h3>	
-</form>
-<div>
+    <h3> Don't Have Account?? <a href="/register"><button type="button" class="btn btn-warning">&nbsp;Sign Up</button></a></h3>	
+</for>
+</div>
     {% for message in messages %}
     <h3>{{message}}</h3>
     {% endfor %}
 </div>
-
 {% endblock %}

@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db.models import Q
 import json 
+from django.contrib.auth.decorators import login_required #Decorator
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -51,8 +53,6 @@ def login_page(request):
 			print('logout')
 			messages.info(request, 'Username or password is invalid')
 			return render(request,'watch/login.html')
-
-
 	else:
 		print('get request')
 		return render(request,'watch/login.html')
@@ -83,13 +83,13 @@ def delete_movies(request, pk):
 	movie.delete()
 	return redirect('watch:movies')
 
-def get_data_querys(query=None):
+def get_data_queryset(query=None):
 	queryset = []
-
 	queries = query.split(" ")
 	for q in queries:
 		movies = Movies.objects.filter(
-            Q(movie_title__icontains = q)
+            Q(movie_title__icontains = q) |
+			Q(movie_description__icontains = q)
             ).distinct()
 
 		for movie in movies:
@@ -100,23 +100,21 @@ def show_list(request):
 	show = ''
 	if request.GET:
 		query = request.GET['q']
-		show = get_data_querys(str(query))
+		show = get_data_queryset(str(query))
 	return render(request, "watch/movies_list.html", {"movies": show})
 
-def show_all_data(request):
-	movie = movies.objects.all()
-	print(type(movie))
-	dic_type = {"movies": list(movie.values("movie_title"))}
+@login_required
+def update_book(request,id):
+	movie = Movies.objects.get(pk=id)
+	print(movie)
+	if request.method == "POST":
+		title = request.POST['title']
+		desc = request.POST['description']
+		releasedate = request.POST['releasedate']
+		movie.movie_title = title
+		movie.movie_description = desc
+		movie.release_date = releasedate
+		movie.save()
+		return redirect('watch:movies')
 
-	return JsonResponse(dic_type)
-
-def watch(request):
-	show = show.objects.all()
-	if request.GET:
-		query = request.GET['q']
-		show = get_data_querys(str(query))
-
-	return render(request, "pages/home.html",{"movies": movie})
-
-
-
+	return render(request,"watch/update.html",{"m":movie})
